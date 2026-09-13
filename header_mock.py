@@ -11,17 +11,17 @@ import base64, pathlib
 from playwright.sync_api import sync_playwright
 
 ROOT = pathlib.Path(__file__).resolve().parent
-OUT = ROOT / "out2"
-SHOTS = ROOT / "headers2"; SHOTS.mkdir(exist_ok=True)
+OUT = ROOT / "out3"
+SHOTS = ROOT / "headers3"; SHOTS.mkdir(exist_ok=True)
 URL = "https://bronier.185.103.164.237.nip.io/"
 # The header sits on brown, so each candidate's LIGHT lockup is the one that
 # belongs there - that is the whole point of having made one.
 CANDS = [("current", None),
-         ("fluted", "fluted-reversed-transparent.png"),
-         ("hairline", "hairline-reversed-transparent.png"),
-         ("serif", "serif-reversed-transparent.png"),
-         ("framed", "framed-reversed-transparent.png"),
-         ("lower", "lower-reversed-transparent.png")]
+         ("slatdot", "slatdot-reversed-transparent.png"),
+         ("stacked", "stacked-reversed-transparent.png"),
+         ("underline", "underline-reversed-transparent.png"),
+         ("slatmark", "slatmark-reversed-transparent.png"),
+         ("both", "both-reversed-transparent.png")]
 
 with sync_playwright() as pw:
     br = pw.chromium.launch(); pg = br.new_page(viewport={"width": 1280, "height": 400})

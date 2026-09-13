@@ -64,6 +64,27 @@ def _svg(w, h, body, defs=""):
             f'<defs>{defs}</defs>{body}</svg>')
 
 
+
+def _keep_bands(x0, x1, y0, y1, grooves, cid):
+    """A clipPath of everything EXCEPT the groove columns.
+
+    Not a <mask>. cairosvg silently ignores <mask> - a positive control
+    (black square, white stripe masked out) came back solid black, while the
+    same test with clip-path came back correct. The grooves in round two's
+    fluted O therefore never rendered in any PNG, and the PNG and the SVG of
+    the same logo disagreed with each other. Bands it is.
+    """
+    rects, x = [], x0
+    for gx, gw in sorted(grooves):
+        if gx > x:
+            rects.append((x, gx - x))
+        x = max(x, gx + gw)
+    if x < x1:
+        rects.append((x, x1 - x))
+    return ('<clipPath id="%s">' % cid) + "".join(
+        f'<rect x="{rx:.2f}" y="{y0:.2f}" width="{rw:.2f}" height="{y1 - y0:.2f}"/>'
+        for rx, rw in rects) + "</clipPath>"
+
 def _paper(w, h, paper):
     return "" if paper is None else f'<rect width="{w:.0f}" height="{h:.0f}" fill="{paper}"/>'
 
@@ -113,14 +134,11 @@ def d_fluted(ink, accent, paper, size=120.0, track=0.16):
     # them only works while there is a paper colour to paint - on the
     # transparent asset, which is the file that actually gets used, white bars
     # would have appeared across the O on every dark background.
-    mask = ("".join(
-        f'<rect x="{gx(i):.2f}" y="{cy - span / 2 - 2:.2f}" width="{groove:.2f}" '
-        f'height="{span + 4:.2f}" fill="#000"/>' for i in range(3)))
-    defs = (f'<mask id="oflute"><rect width="{W:.0f}" height="{H:.0f}" fill="#fff"/>'
-            f'{mask}</mask>'
-            f'<clipPath id="oaccent"><rect x="{gx(1):.2f}" '
-            f'y="{cy - span / 2 - 2:.2f}" width="{groove:.2f}" '
-            f'height="{span + 4:.2f}"/></clipPath>')
+    defs = (_keep_bands(cx - span, cx + span, cy - span, cy + span,
+                        [(gx(i), groove) for i in range(3)], "oflute")
+            + f'<clipPath id="oaccent"><rect x="{gx(1):.2f}" '
+              f'y="{cy - span / 2 - 2:.2f}" width="{groove:.2f}" '
+              f'height="{span + 4:.2f}"/></clipPath>')
     ring = (f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="{O_R:.2f}" fill="none" '
             f'stroke="{ink}" stroke-width="{O_STEM:.2f}"/>')
     # the accent is the same ring drawn again, showing only inside the middle
@@ -130,7 +148,7 @@ def d_fluted(ink, accent, paper, size=120.0, track=0.16):
                    f'stroke-width="{O_STEM:.2f}"/></g>')
     body = (_paper(W, H, paper)
             + f'<g fill="{ink}">{pre_d}{post_d}</g>'
-            + f'<g mask="url(#oflute)">{ring}</g>'
+            + f'<g clip-path="url(#oflute)">{ring}</g>'
             + accent_ring)
     return _svg(W, H, body, defs), W, H
 

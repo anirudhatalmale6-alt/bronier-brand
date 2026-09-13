@@ -1,5 +1,33 @@
 # Bronier — logo concepts
 
+## Round 3 (`out3/`, `favicon3/`, `headers3/`) — current
+
+*"Lowercase is good. Can you also try to create something related to my niche."*
+So: the round-2 lowercase wordmark he picked, in his clay, with the panel slats
+worked in five ways.
+
+| | variant | note |
+|---|---|---|
+| J | `slatdot` | the dot on the i becomes a slat — quietest, first to vanish small |
+| K | `stacked` | slats above the word — the SQUARE lockup, not a header logo |
+| L | `underline` | a run of slats beneath |
+| M | `slatmark` | slats beside the word — **recommended**, the only one still showing slats in the real header |
+| N | `both` | slat dot + underline |
+
+### Two things that did not survive
+
+**A fluted lowercase o.** Slats cut through the ring broke the letter into four
+arcs; slats inside the counter read as a face. Both measured, both binned — K is
+that slot, reused for the lockup that was actually missing.
+
+**`<mask>` does not work in cairosvg.** A positive control — black square, white
+stripe masked out — came back solid black, while the same test with `clip-path`
+was correct. Round 2's fluted O therefore rendered with **no grooves at all** in
+every PNG, so the PNG and the SVG of the same logo disagreed. Both rounds now
+use `_keep_bands()`, a clipPath of everything except the groove columns.
+
+---
+
 ## Round 2 (`out2/`, `favicon2/`, `headers2/`) — current
 
 His note: *"Something else, doesn't need to be brown color. Only Bronier.
