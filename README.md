@@ -1,5 +1,33 @@
 # Bronier — logo concepts
 
+## Round 2 (`out2/`, `favicon2/`, `headers2/`) — current
+
+His note: *"Something else, doesn't need to be brown color. Only Bronier.
+Without decor."* So: the word BRONIER alone, no symbol, no DECOR, no brown,
+nothing carried over from round one.
+
+| | direction | colour |
+|---|---|---|
+| E | `fluted` | charcoal + amber — the O carries one vertical groove |
+| F | `hairline` | black on white — **fragile below ~30px, faint on the brown header** |
+| G | `serif` | deep green |
+| H | `framed` | slate blue — **recommended**, with G |
+| I | `lower` | clay, lowercase |
+
+Each is built in three ways: `-colour` (its own palette), `-neutral` (plain
+black, so the shape can be judged without the colour arguing) and `-reversed`
+(light, for a dark header). Every one also exists as `-transparent`.
+
+**His site is brown.** A black or charcoal wordmark drops onto it unchanged;
+green, slate or clay means the site palette moves too. That is his decision,
+not one to make quietly inside a logo file.
+
+`python3 logo2.py` rebuilds; `python3 sheet2.py` makes the PDF.
+
+---
+
+## Round 1 (`out/`, `favicon/`, `headers/`) — superseded
+
 Four directions for **bronier.mk** (decorative wall panels, Strumica, MK).
 Nothing here is final: pick a letter and it gets refined.
 
