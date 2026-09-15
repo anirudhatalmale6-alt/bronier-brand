@@ -1,5 +1,18 @@
 # Bronier — logo concepts
 
+## BLACK is the answer (15 Sep)
+
+*"also make the logo black. and all the colors black instead of brown. it's
+better estetics."* So the delivered wordmark is **`out4/*-black.*`** — the
+lowercase wordmark with the slats on the o, in `#141414`. The clay versions
+stay in the repo only as history; do not send them.
+
+The site matches: `bronier-web` is black and white throughout. The only colour
+left anywhere is in the panel SWATCHES, because a customer choosing between oak
+and anthracite needs to see oak and anthracite.
+
+---
+
 ## Round 3 (`out3/`, `favicon3/`, `headers3/`) — current
 
 *"Lowercase is good. Can you also try to create something related to my niche."*
